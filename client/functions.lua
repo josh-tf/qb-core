@@ -232,13 +232,15 @@ QBCore.Functions.GetPlayersFromCoords = function(coords, distance)
 end
 
 QBCore.Functions.HasItem = function(source, cb, item)
-	local retval = false
+	local retval = nil
 	QBCore.Functions.TriggerCallback('QBCore:HasItem', function(result)
 		if result then
 			retval = true
+		else
+			retval = false
 		end
-		return retval
 	end, item)
+	while not retval do Citizen.Wait(5) end
 	return retval
 end
 
